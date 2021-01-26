@@ -4,7 +4,6 @@ import getData from "../api";
 import MyVerticallyCenteredModal from "./Modal";
 import PaginationBasic from "./pagination";
 import "./table.css";
-
 const headers = [
   {
     key: "name",
@@ -105,48 +104,7 @@ function Table() {
   useEffect(() => {
     loadData();
   }, []);
-  const globalSearch = (e) => {
-    let searchInput = e.target.value;
-    if (!searchInput) loadData();
-    let filteredData = users.filter((value) => {
-      return (
-        value.name
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.name
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.mass
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.hair_color
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.skin_color
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.eye_color
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.birth_year
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase()) ||
-        value.gender
-          .toString()
-          .toLowerCase()
-          .includes(searchInput.toLowerCase())
-      );
-    });
-    console.log(filteredData);
-    setUsers(filteredData);
-  };
+
   return (
     <div className="ApiTable">
       <input type="checkbox" id="nav-toggle" />
@@ -222,12 +180,7 @@ function Table() {
 
           <div class="search-wrapper">
             <i class="fas fa-search"></i>
-            <input
-              type="search"
-              class="searchInput"
-              placeholder="Search Here"
-              onInput={globalSearch}
-            />
+            <input type="search" placeholder="Search Here" />
           </div>
 
           <div class="user-wrapper">
