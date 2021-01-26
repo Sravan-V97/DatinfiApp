@@ -1,68 +1,110 @@
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import getData from "../api";
+import MyVerticallyCenteredModal from "./Modal";
+import PaginationBasic from "./pagination";
 import "./table.css";
-
+const headers = [
+  {
+    key: "name",
+    label: "Name",
+  },
+  {
+    key: "height",
+    label: "Height",
+  },
+  {
+    key: "mass",
+    label: "Mass",
+  },
+  {
+    key: "hair_color",
+    label: "Hair Colour",
+  },
+  {
+    key: "skin_color",
+    label: "skin Colour",
+  },
+  {
+    key: "eye_color",
+    label: "Eye Color",
+  },
+  {
+    key: "birth_year",
+    label: "Birth year",
+  },
+  {
+    key: "gender",
+    label: "Gender",
+  },
+  {
+    key: "homeworld",
+    label: "HomeWorld",
+    isLink: true,
+  },
+  {
+    key: "films",
+    label: "Films",
+    isArray: true,
+  },
+  {
+    key: "species",
+    label: "Species",
+    isLink: true,
+  },
+  {
+    key: "vehicles",
+    label: "Vehicles",
+    isArray: true,
+  },
+  {
+    key: "starships",
+    label: "Starships",
+    isArray: true,
+  },
+];
 function Table() {
+  const [show, setShow] = useState(false);
+  const [links, setLinks] = useState([]);
+  const [title, setTitle] = useState("");
+  const [pages, setPages] = useState(0);
+  const [totalPages, setTotalPages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [users, setUsers] = useState([]);
-  useEffect(async () => {
-    let Response = await getData();
+
+  const handleClose = () => setShow(false);
+  const handleShow = (link, Label) => {
+    setLinks(link);
+    setTitle(Label);
+  };
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+  const loadData = async () => {
+    let Response = await getData(currentPage);
     console.log(Response);
+    calculatePages(Response.count);
     setUsers(Response.results);
+  };
+  useEffect(() => {
+    if (links.length) setShow(true);
+  }, [links]);
+  useEffect(() => {
+    loadData();
+  }, [currentPage]);
+  const calculatePages = (total_items) => {
+    let _totalPages = Math.ceil(total_items / 10);
+    setPages(_totalPages);
+    var arr = [];
+    for (var i = 1; i <= _totalPages; i++) {
+      arr.push(i.toString());
+    }
+    setTotalPages(arr);
+  };
+  useEffect(() => {
+    loadData();
   }, []);
-  const headers = [
-    {
-      key: "name",
-      label: "Name",
-    },
-    {
-      key: "height",
-      label: "Height",
-    },
-    {
-      key: "mass",
-      label: "Mass",
-    },
-    {
-      key: "hair_color",
-      label: "Hair Colour",
-    },
-    {
-      key: "skin_color",
-      label: "skin Colour",
-    },
-    {
-      key: "eye_color",
-      label: "Eye Color",
-    },
-    {
-      key: "birth_year",
-      label: "Birth year",
-    },
-    {
-      key: "gender",
-      label: "Gender",
-    },
-    {
-      key: "homeworld",
-      label: "HomeWorld",
-    },
-    {
-      key: "films",
-      label: "Films",
-    },
-    {
-      key: "species",
-      label: "Species",
-    },
-    {
-      key: "vehicles",
-      label: "Vehicles",
-    },
-    {
-      key: "starships",
-      label: "Starships",
-    },
-  ];
+
   return (
     <div className="ApiTable">
       <input type="checkbox" id="nav-toggle" />
@@ -156,6 +198,12 @@ function Table() {
             <!-- Main Content --> */}
         <main>
           <div class="container">
+            <MyVerticallyCenteredModal
+              show={show}
+              handleClose={handleClose}
+              links={links}
+              heading={title}
+            />
             <h2>PEOPLES LIST</h2>
             <ul class="responsive-table">
               <li class="table-header">
@@ -167,12 +215,39 @@ function Table() {
                 <li class="table-row">
                   {headers.map((item) => (
                     <div class="col col-1" data-label={item.label}>
-                      {user[item.key]}
+                      {item.isArray ? (
+                        <Button
+                          variant="primary"
+                          onClick={() => {
+                            handleShow(user[item.key], item.label);
+                          }}
+                        >
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </Button>
+                      ) : item.isLink ? (
+                        <Button
+                          variant="link"
+                          target="_blank"
+                          href={
+                            user[item.key] ? user[item.key].toString() : "#"
+                          }
+                        >
+                          <i class="fa fa-link" aria-hidden="true"></i>
+                        </Button>
+                      ) : (
+                        user[item.key]
+                      )}
                     </div>
                   ))}
                 </li>
               ))}
             </ul>
+            <PaginationBasic
+              totalPages={totalPages}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              pages={pages}
+            />
           </div>
         </main>
         {/* <!-- Main Content End Here --> */}

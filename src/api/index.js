@@ -38,8 +38,8 @@ const handleError = (error) => {
 
   return null;
 };
-const getData = async () => {
-  let Response = await axios.get(baseUrl).catch(handleError);
+const getData = async (page = 1) => {
+  let Response = await axios.get(`${baseUrl}?page=${page}`).catch(handleError);
   return Response.data;
 };
 

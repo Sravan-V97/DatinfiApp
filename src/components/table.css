@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 :root {
   --main-color: #ff5f2f;
@@ -31,7 +31,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Sidebar */
@@ -43,14 +43,13 @@ body {
   height: 100vh;
   background: var(--sidebar-color);
   z-index: 100;
-  white-space:nowrap;
+  white-space: nowrap;
   transition: width 300ms;
 }
 
 .sidebar-brand {
   color: var(--white);
   padding: 1rem 0rem 1rem 1rem;
- 
 }
 
 .sidebar-brand span:first-child {
@@ -106,7 +105,7 @@ body {
 
 header {
   background: var(--sidebar-color);
-  display: flex;
+  display: flex !important;
   justify-content: space-between;
   padding: 1rem 1.5rem;
   box-shadow: var(--box-shadow);
@@ -180,9 +179,9 @@ main {
 
 /* tables */
 .container {
-  max-width: 1000px;
+  /* max-width: 1000px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -200,7 +199,7 @@ main {
   margin-bottom: 25px;
 }
 .responsive-table .table-header {
-  background-color: #95A5A6;
+  background-color: #95a5a6;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -210,7 +209,8 @@ main {
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
 .responsive-table .col-1 {
-  flex-basis: 10%;
+  flex-basis: 7.69%;
+  word-break: break-word;
 }
 .responsive-table .col-2 {
   flex-basis: 40%;
@@ -221,7 +221,6 @@ main {
 .responsive-table .col-4 {
   flex-basis: 25%;
 }
-
 
 #nav-toggle {
   display: none;
@@ -254,7 +253,6 @@ main {
   width: calc(100% - var(--sidebar-width-check));
 }
 
-
 /* Media Queries */
 
 /* Meaning Screen width upto 1200px or less */
@@ -285,8 +283,6 @@ main {
     left: var(--sidebar-width-check);
     width: calc(100% - var(--sidebar-width-check));
   }
-
- 
 }
 
 @media (max-width: 767px) {
@@ -304,7 +300,7 @@ main {
     padding: 10px 0;
   }
   .responsive-table .col:before {
-    color: #6C7A89;
+    color: #6c7a89;
     padding-right: 10px;
     content: attr(data-label);
     flex-basis: 50%;
@@ -338,14 +334,14 @@ main {
     overflow: hidden;
     border: 1px solid #505050;
   }
-  
+
   .search-wrapper i {
     display: inline-block;
     padding: 0rem 1rem;
     font-size: 1.5rem;
     color: rgb(209, 205, 205);
   }
-  
+
   .search-wrapper input {
     height: 100%;
     padding: 0.5rem;
@@ -354,9 +350,9 @@ main {
     background: bottom;
     width: 90px;
   }
-  
+
   .user-wrapper h4 {
-   display: none;
+    display: none;
   }
 
   .main-content {
