@@ -177,6 +177,10 @@ main {
   min-height: calc(100vh - 60px);
 }
 
+body {
+  background: var(--main-background) !important;
+}
+
 /* tables */
 .container {
   /* max-width: 1000px;
@@ -354,6 +358,17 @@ main {
     width: 90px;
   }
 
+  .user-wrapper img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 1rem;
+  }
+  .user-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
   .user-wrapper h4 {
     display: none;
   }
@@ -365,6 +380,7 @@ main {
   header {
     width: 100% !important;
     left: 0 !important;
+    justify-content: normal;
   }
 
   #nav-toggle:checked + .sidebar {
