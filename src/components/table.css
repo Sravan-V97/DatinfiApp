@@ -390,3 +390,6 @@ main {
     grid-template-columns: 1fr;
   }
 }
+.searchInput {
+  color: #ffff !important;
+}
